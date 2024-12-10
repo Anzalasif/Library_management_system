@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master List of Memberships</title>
+</head>
+<body>
+    <h2>Master List of Memberships</h2>
+    <form action="submit_membership.php" method="POST">
+        <label for="membership_id">Membership Id:</label>
+        <input type="text" id="membership_id" name="membership_id" required><br><br>
+
+        <label for="member_name">Name of Member:</label>
+        <input type="text" id="member_name" name="member_name" required><br><br>
+
+        <label for="contact_number">Contact Number:</label>
+        <input type="text" id="contact_number" name="contact_number" required><br><br>
+
+        <label for="contact_address">Contact Address:</label>
+        <input type="text" id="contact_address" name="contact_address" required><br><br>
+
+        <label for="aadhar_card_no">Aadhar Card No:</label>
+        <input type="text" id="aadhar_card_no" name="aadhar_card_no" required><br><br>
+
+        <label for="start_date">Start Date of Membership:</label>
+        <input type="date" id="start_date" name="start_date" required><br><br>
+
+        <label for="end_date">End Date of Membership:</label>
+        <input type="date" id="end_date" name="end_date" required><br><br>
+
+        <label for="status">Status (Active/Inactive):</label>
+        <input type="text" id="status" name="status" required><br><br>
+
+        <label for="amount_pending">Amount Pending (Fine):</label>
+        <input type="number" id="amount_pending" name="amount_pending" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

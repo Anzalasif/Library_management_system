@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Issues</title>
+</head>
+<body>
+    <h2>Active Issues</h2>
+    <form action="submit_active_issue.php" method="POST">
+        <label for="serial_no">Serial No (Book/Movie):</label>
+        <input type="text" id="serial_no" name="serial_no" required><br><br>
+
+        <label for="book_movie_name">Name of Book/Movie:</label>
+        <input type="text" id="book_movie_name" name="book_movie_name" required><br><br>
+
+        <label for="membership_id">Membership Id:</label>
+        <input type="text" id="membership_id" name="membership_id" required><br><br>
+
+        <label for="issue_date">Date of Issue:</label>
+        <input type="date" id="issue_date" name="issue_date" required><br><br>
+
+        <label for="return_date">Date of Return:</label>
+        <input type="date" id="return_date" name="return_date" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

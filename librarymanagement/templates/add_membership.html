@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Membership</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group .radio-group {
+            display: flex;
+            gap: 10px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        .button-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .button-group .cancel {
+            background-color: #f44336;
+            color: white;
+        }
+        .button-group .confirm {
+            background-color: #2575fc;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Add Membership</h2>
+        <form id="addMembershipForm">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="contactName">Contact Name</label>
+                <input type="text" id="contactName" name="contactName" required>
+            </div>
+            <div class="form-group">
+                <label for="contactAddress">Contact Address</label>
+                <input type="text" id="contactAddress" name="contactAddress" required>
+            </div>
+            <div class="form-group">
+                <label for="aadharCardNo">Aadhar Card No</label>
+                <input type="text" id="aadharCardNo" name="aadharCardNo" required>
+            </div>
+            <div class="form-group">
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" name="startDate" required>
+            </div>
+            <div class="form-group">
+                <label for="endDate">End Date</label>
+                <input type="date" id="endDate" name="endDate" required>
+            </div>
+            <div class="form-group">
+                <label>Membership</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="membership" value="Six Months" required> Six Months</label>
+                    <label><input type="radio" name="membership" value="One Year"> One Year</label>
+                    <label><input type="radio" name="membership" value="Two Years"> Two Years</label>
+                </div>
+            </div>
+            <div class="button-group">
+                <button type="button" class="cancel" onclick="cancelForm()">Cancel</button>
+                <button type="button" class="confirm" onclick="confirmForm()">Confirm</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function cancelForm() {
+            // Redirect to the correct path of maintenance_home.html
+            const url = "maintenance_home.html"; // Adjust the path as needed
+            alert("Redirecting to: " + url);
+            window.location.href = url;
+        }
+
+        function confirmForm() {
+            const form = document.getElementById('addMembershipForm');
+            if (form.checkValidity()) {
+                const formData = new FormData(form);
+                const memberData = {};
+                formData.forEach((value, key) => {
+                    memberData[key] = value;
+                });
+                alert(`Member Added Successfully:\n\n${JSON.stringify(memberData, null, 2)}`);
+                form.reset();
+            } else {
+                alert("Please fill out all required fields.");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master List of Movies</title>
+</head>
+<body>
+    <h2>Master List of Movies</h2>
+    <form action="submit_movie.php" method="POST">
+        <label for="serial_no">Serial No:</label>
+        <input type="text" id="serial_no" name="serial_no" required><br><br>
+
+        <label for="movie_name">Name of Movie:</label>
+        <input type="text" id="movie_name" name="movie_name" required><br><br>
+
+        <label for="author_name">Author Name:</label>
+        <input type="text" id="author_name" name="author_name" required><br><br>
+
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" required><br><br>
+
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" required><br><br>
+
+        <label for="cost">Cost:</label>
+        <input type="number" id="cost" name="cost" required><br><br>
+
+        <label for="procurement_date">Procurement Date:</label>
+        <input type="date" id="procurement_date" name="procurement_date" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

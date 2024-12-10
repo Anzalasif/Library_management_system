@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #2575fc;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            border-bottom: 4px solid #388E3C;
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 900px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .content-title {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        .menu-section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .menu-section h3 {
+            margin: 0 0 15px 0;
+            font-size: 24px;
+            color: #333;
+        }
+        .reports-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .reports-table td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #e7f3fe;
+        }
+        .reports-table td a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+        .reports-table td a:hover {
+            color: #2575fc;
+            text-decoration: underline;
+        }
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .actions button {
+            padding: 12px 24px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .actions button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        .logout {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .logout button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .logout button:hover {
+            background-color: #d32f2f;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div>Charts</div>
+        <div>Reports</div>
+    </div>
+
+    <!-- Report Section -->
+    <div class="container">
+        <div class="content-title">Available Reports</div>
+        <div class="menu-section">
+            <table class="reports-table">
+                <tr><td><a href="{{ url_for('master_list_books') }}">Master List of Books</a></td></tr>
+                <tr><td><a href="{{ url_for('master_list_movies') }}">Master List of Movies</a></td></tr>
+                <tr><td><a href="{{ url_for('master_list_memberships') }}">Master List of Memberships</a></td></tr>
+                <tr><td><a href="{{ url_for('active_issues') }}">Active Issues</a></td></tr>
+                <tr><td><a href="{{ url_for('overdue_returns') }}">Overdue Returns</a></td></tr>
+                <tr><td><a href="{{ url_for('issue_requests') }}">Pending Issue Requests</a></td></tr>
+            </table>
+        </div>
+
+        <!-- Actions Section -->
+        <div class="actions">
+            <button onclick="window.print()">Print Report</button>
+        </div>
+    </div>
+
+    <!-- Logout Button -->
+    <div class="logout">
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit">Log Out</button>
+        </form>
+    </div>
+    
+</body>
+</html>

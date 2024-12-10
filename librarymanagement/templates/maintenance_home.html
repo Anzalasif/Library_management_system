@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Layout</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #2575fc;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            border-bottom: 4px solid #388E3C;
+        }
+        .navbar div {
+            padding: 0 15px;
+        }
+        .menu {
+            margin: 20px auto;
+            width: 70%;
+            max-width: 1000px;
+        }
+        .menu-section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .menu-section h3 {
+            margin: 0 0 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .menu-section a {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 16px;
+        }
+        .menu-section a:hover {
+            background-color: #2575fc;
+            color: #fff;
+        }
+        .logout {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .logout button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .logout button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div>Chart</div>
+        <div>Home</div>
+    </div>
+
+    <!-- Menu Sections -->
+    <div class="menu">
+        <!-- Membership Section -->
+        <div class="menu-section">
+            <h3>Membership</h3>
+            <a href="{{ url_for('add_membership') }}">Add Membership</a>
+            <a href="{{ url_for('update_membership') }}">Update Membership</a>
+        </div>
+
+        <!-- Books/Movies Section -->
+        <div class="menu-section">
+            <h3>Books/Movies</h3>
+            <a href="{{ url_for('add_book') }}">Add Book</a>
+            <a href="{{ url_for('update_book') }}">Update Book</a>
+        </div>
+
+        <!-- User Management Section -->
+        <div class="menu-section">
+            <h3>User Management</h3>
+            <a href="{{ url_for('add_user') }}">Add User</a>
+            <a href="{{ url_for('update_user') }}">Update User</a>
+        </div>
+    </div>
+
+    <!-- Logout Button -->
+    <div class="logout">
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit">Log Out</button>
+        </form>
+    </div>
+</body>
+</html>

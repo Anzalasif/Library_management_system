@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>User Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #2575fc;
+            color: white;
+            border-bottom: 2px solid #388E3C;
+        }
+        .menu-section {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 50%;
+        }
+        .menu-section h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        form label {
+            font-weight: bold;
+            color: #555;
+        }
+        form input[type="text"], 
+        form input[type="checkbox"], 
+        form input[type="radio"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        form .radio-group, 
+        form .checkbox-group {
+            display: flex;
+            gap: 20px;
+        }
+        form button {
+            padding: 12px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+        .logout {
+            text-align: right;
+            margin: 20px;
+        }
+        .logout button {
+            background: none;
+            border: none;
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+            font-size: 14px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div>Chart</div>
+        <div>User Management</div>
+    </div>
+
+    <!-- User Management Form -->
+    <div class="menu-section">
+        <h3>User Management</h3>
+        <form action="#" method="post" onsubmit="return validateForm()">
+            <!-- Radio Buttons for New or Existing User -->
+            <label>Select User Type:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="userType" value="newUser" required> New User</label>
+                <label><input type="radio" name="userType" value="existingUser"> Existing User</label>
+            </div>
+
+            <!-- Input for Name -->
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <!-- Checkbox for Status (Active) -->
+            <label>Status:</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" id="status" name="status"> Active</label>
+            </div>
+
+            <!-- Checkbox for Admin -->
+            <label>Admin Privileges:</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" id="admin" name="admin"> Admin</label>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Logout Button -->
+    <div class="logout">
+        <button>Log Out</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        A Project by Harsh Sonkar
+    </div>
+
+    <!-- Validation Script -->
+    <script>
+        function validateForm() {
+            let name = document.getElementById('name').value.trim();
+            let userType = document.querySelector('input[name="userType"]:checked');
+
+            if (!name || !userType) {
+                alert("Please fill all the required fields.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

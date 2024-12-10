@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #2575fc;
+            color: white;
+            border-radius: 8px 8px 0 0;
+        }
+        .navbar div {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+        }
+        .actions {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .actions a {
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #2575fc;
+        }
+        .actions a.disabled {
+            color: grey;
+            pointer-events: none;
+        }
+        .actions a:hover:not(.disabled) {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #2575fc;
+            color: white;
+        }
+        .logout {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .logout button {
+            background: none;
+            border: none;
+            color: #2575fc;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .footer {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 14px;
+            color: #777;
+            background-color: #f9f9f9;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            border-radius: 0 0 8px 8px;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            // Get the form fields
+            var searchBook = document.getElementById("searchBook").value.trim();
+            var issueBook = document.getElementById("issueBook").value.trim();
+            var returnBook = document.getElementById("returnBook").value.trim();
+            var issueDropdown = document.getElementById("issueBookDropdown").value;
+            var returnDropdown = document.getElementById("returnBookDropdown").value;
+            
+            // Check if at least one field has a value
+            if (searchBook === "" && issueBook === "" && returnBook === "" && issueDropdown === "" && returnDropdown === "") {
+                document.getElementById("error-message").innerText = "Please fill in at least one field.";
+                return false;  // Prevent form submission
+            }
+
+            return true;  // Allow form submission if validation passes
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="navbar">
+            <div><a href="#">Chart</a></div>
+            <div>User Home Page</div>
+           <!-- <div><a href="index.html">Back</a></div> -->
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+            <!-- Maintenance link is disabled for users -->
+            <a href="#" class="disabled">Maintenance</a>
+            <a href="#">Reports</a>
+            <a href="{{ url_for('transactions_page') }}">Transactions</a>
+        </div>
+
+        <!-- Product Details Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Code No. From</th>
+                    <th>Code No. To</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>SC(B/M)000001</td>
+                    <td>SC(B/M)000004</td>
+                    <td>Science</td>
+                </tr>
+                <tr>
+                    <td>EC(B/M)000001</td>
+                    <td>EC(B/M)000004</td>
+                    <td>Economics</td>
+                </tr>
+                <tr>
+                    <td>FC(B/M)000001</td>
+                    <td>FC(B/M)000004</td>
+                    <td>Fiction</td>
+                </tr>
+                <tr>
+                    <td>CH(B/M)000001</td>
+                    <td>CH(B/M)000004</td>
+                    <td>Children</td>
+                </tr>
+                <tr>
+                    <td>PD(B/M)000001</td>
+                    <td>PD(B/M)000004</td>
+                    <td>Personal Development</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Logout -->
+        <div class="logout">
+            <form action="{{ url_for('logout') }}" method="post">
+                <button type="submit">Log Out</button>
+            </form>
+        </div>
+
+        
+    </div>
+</body>
+</html>

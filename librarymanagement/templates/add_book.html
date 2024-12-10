@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Add/Update Book or Movie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #2575fc;
+            color: white;
+            border-bottom: 2px solid #388E3C;
+        }
+        .menu-section {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 50%;
+        }
+        .menu-section h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        form label {
+            font-weight: bold;
+            color: #555;
+        }
+        form input[type="text"], 
+        form input[type="date"], 
+        form input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        form .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+        form button {
+            padding: 12px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+        .logout {
+            text-align: right;
+            margin: 20px;
+        }
+        .logout button {
+            background: none;
+            border: none;
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+            font-size: 14px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div>Chart</div>
+        <div>Add/Update Book or Movie</div>
+    </div>
+
+    <!-- Add/Update Book or Movie Form -->
+    <div class="menu-section">
+        <h3>Add/Update Book or Movie</h3>
+        <form action="#" method="post" onsubmit="return validateForm()">
+            <!-- Radio Buttons for Book or Movie -->
+            <label>Select Type:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="mediaType" value="book" required> Book</label>
+                <label><input type="radio" name="mediaType" value="movie"> Movie</label>
+            </div>
+
+            <!-- Input for Book/Movie Name -->
+            <label for="bookMovieName">Book/Movie Name</label>
+            <input type="text" id="bookMovieName" name="bookMovieName" required>
+
+            <!-- Calendar for Date of Procurement -->
+            <label for="procurementDate">Date of Procurement</label>
+            <input type="date" id="procurementDate" name="procurementDate" required>
+
+            <!-- Quantity/Copies -->
+            <label for="quantity">Quantity/Copies</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Logout Button -->
+    <div class="logout">
+        <button>Log Out</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        A Project by Harsh Sonkar
+    </div>
+
+    <!-- Validation Script -->
+    <script>
+        function validateForm() {
+            let bookMovieName = document.getElementById('bookMovieName').value.trim();
+            let procurementDate = document.getElementById('procurementDate').value;
+            let quantity = document.getElementById('quantity').value;
+            let mediaType = document.querySelector('input[name="mediaType"]:checked');
+
+            if (!bookMovieName || !procurementDate || !mediaType || quantity <= 0) {
+                alert("Please fill all the fields correctly.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

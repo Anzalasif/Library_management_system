@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Transactions</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 70%;
+            margin: 30px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #2575fc;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .navbar div {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .actions .cancel-button {
+            background-color: #f44336;
+            color: white;
+        }
+        .actions .confirm-button {
+            background-color: #2575fc;
+            color: white;
+        }
+        .actions .cancel-button:hover {
+            background-color: #d32f2f;
+        }
+        .actions .confirm-button:hover {
+            background-color: #388E3C;
+        }
+        .logout {
+            text-align: center;
+        }
+        .logout button {
+            background: none;
+            border: none;
+            color: #2575fc;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .logout button:hover {
+            text-decoration: none;
+        }
+        input[type="text"], input[type="date"], select, textarea {
+            width: calc(100% - 12px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin: 5px 0;
+        }
+        textarea {
+            resize: vertical;
+        }
+        .error-message {
+            color: #f44336;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function showSuccessPopup() {
+            alert("Transaction successful!");
+        }
+
+        function validateForm() {
+            const selectBook = document.getElementById('issueBook');
+            if (selectBook.value === "") {
+                alert("Please select a book.");
+                selectBook.focus();
+                return false;
+            }
+            showSuccessPopup();
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="navbar">
+            <div>Chart</div>
+            <div>Transactions</div>
+            <div><a href="#" class="back-button">Home</a></div>
+        </div>
+
+        <!-- Table -->
+        <table>
+            <tr>
+                <th>Is book available?</th>
+                <td>Book Issue</td>
+            </tr>
+            <tr>
+                <th>Issue book?</th>
+                <td>
+                    <label for="issueBook">Select Book</label>
+                    <select name="issueBookDropdown" id="issueBook" required>
+                        <option value="">Select a book</option>
+                        <option value="book1">The Great Gatsby</option>
+                        <option value="book2">1984</option>
+                        <option value="book3">To Kill a Mockingbird</option>
+                        <option value="book4">The Catcher in the Rye</option>
+                        <option value="book5">Moby Dick</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Return book?</th>
+                <td>
+                    <label for="returnBook">Enter Book Name</label>
+                    <input type="text" id="returnBook" name="returnBook" placeholder="Enter book name">
+                </td>
+            </tr>
+            <tr>
+                <th>Issue Date</th>
+                <td>
+                    <input type="date" id="issueDate" name="issueDate">
+                </td>
+            </tr>
+            <tr>
+                <th>Return Date</th>
+                <td>
+                    <input type="date" id="returnDate" name="returnDate">
+                </td>
+            </tr>
+            <tr>
+                <th>Remarks</th>
+                <td>
+                    <textarea id="remarks" name="remarks" placeholder="Text area/Text Non Mandatory" rows="3"></textarea>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Buttons -->
+        <div class="actions">
+            <button type="button" class="cancel-button" onclick="window.location.href='/cancel'">Cancel</button>
+            <button type="button" class="confirm-button" onclick="validateForm()">Confirm</button>
+        </div>
+
+        <!-- Logout -->
+        <div class="logout">
+            <form action="{{ url_for('logout') }}" method="post">
+                <button type="submit">Log Out</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

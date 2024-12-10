@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Fine Transactions</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 70%;
+            margin: 30px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #2575fc;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .navbar div {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .actions .cancel-button {
+            background-color: #f44336;
+            color: white;
+        }
+        .actions .confirm-button {
+            background-color: #2575fc;
+            color: white;
+        }
+        .actions .cancel-button:hover {
+            background-color: #d32f2f;
+        }
+        .actions .confirm-button:hover {
+            background-color: #388E3C;
+        }
+        .logout {
+            text-align: center;
+        }
+        .logout button {
+            background: none;
+            border: none;
+            color: #2575fc;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .logout button:hover {
+            text-decoration: none;
+        }
+        input[type="text"], input[type="date"], textarea, select {
+            width: calc(100% - 12px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin: 5px 0;
+        }
+        input[type="checkbox"] {
+            margin-top: 10px;
+        }
+        .error-message {
+            color: #f44336;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .mandatory::after {
+            content: "*";
+            color: red;
+        }
+    </style>
+    <script>
+        function confirmTransaction(event) {
+            const bookName = document.getElementById('bookName').value;
+            const issueDate = document.getElementById('issueDate').value;
+            const returnDate = document.getElementById('returnDate').value;
+
+            if (!bookName || !issueDate || !returnDate) {
+                alert("Please fill in all required fields.");
+                event.preventDefault(); // Prevent form submission
+                return false;
+            }
+
+            alert("Fine paid successfully!");
+            return true; // Allow form submission
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="navbar">
+            <div>Chart</div>
+            <div>Pay Fine Transactions</div>
+            <div><a href="{{ url_for('user_page') }}" class="back-button">Home</a></div>
+        </div>
+
+        <!-- Form -->
+        <form action="#" method="post" onsubmit="return confirmTransaction(event);">
+            <!-- Table -->
+            <table>
+                <tr>
+                    <th>Is book available?</th>
+                    <td>Pay Fine</td>
+                </tr>
+                <tr>
+                    <th class="mandatory">Enter Book Name</th>
+                    <td>
+                        <input type="text" id="bookName" name="bookName" placeholder="Text Box" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Enter Author</th>
+                    <td>
+                        <input type="text" id="author" name="author" placeholder="Text Box">
+                    </td>
+                </tr>
+                <tr>
+                    <th class="mandatory">Serial No</th>
+                    <td>
+                        <input type="text" id="serialNo" name="serialNo" placeholder="Text Box" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="mandatory">Issue Date</th>
+                    <td>
+                        <input type="date" id="issueDate" name="issueDate" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="mandatory">Return Date</th>
+                    <td>
+                        <input type="date" id="returnDate" name="returnDate" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Actual Return Date</th>
+                    <td>
+                        <input type="date" id="actualReturnDate" name="actualReturnDate">
+                    </td>
+                </tr>
+                <tr>
+                    <th class="mandatory">Fine Calculated</th>
+                    <td>
+                        <input type="text" id="fineCalculated" name="fineCalculated" placeholder="0" value="0" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Fine Paid</th>
+                    <td>
+                        <input type="checkbox" id="finePaid" name="finePaid">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Remarks</th>
+                    <td>
+                        <textarea id="remarks" name="remarks" placeholder="Text area Non Mandatory" rows="3"></textarea>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Buttons -->
+            <div class="actions">
+                <button type="button" class="cancel-button" onclick="window.location.href='/cancel'">Cancel</button>
+                <button type="submit" class="confirm-button">Confirm</button>
+            </div>
+        </form>
+
+        <!-- Logout -->
+        <div class="logout">
+            <form action="{{ url_for('logout') }}" method="post">
+                <button type="submit">Log Out</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

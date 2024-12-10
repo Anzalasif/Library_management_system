@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #2575fc;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        .navbar div {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .navbar .center {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table th, table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+        table td a {
+            text-decoration: none;
+            color: #2575fc;
+            font-weight: bold;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .actions button {
+            padding: 10px 20px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .actions button:hover {
+            background-color: #45a049;
+        }
+        .logout {
+            text-align: right;
+            margin-top: 10px;
+        }
+        .logout button {
+            background: none;
+            border: none;
+            color: #2575fc;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="navbar">
+            <div>Chart</div>
+            <div class="center">Transactions</div>
+            <div><a href="{{ url_for('home_redirect') }}">Home</a></div>
+        </div>
+
+        <!-- Table -->
+        <table>
+            <tr>
+                <th>Check Book Availability</th>
+                <td><a href="{{ url_for('search_results') }}">Check Availability</a></td>
+            </tr>
+            <tr>
+                <th>Want to Issue a Book</th>
+                <td><a href="{{ url_for('admin_book_issue') }}">Issue Book</a></td>
+            </tr>
+            <tr>
+                <th>Want to Return a Book</th>
+                <td><a href="{{ url_for('admin_returnbook') }}">Return Book</a></td>
+            </tr>
+            <tr>
+                <th>Want to Pay Fine</th>
+                <td><a href="{{ url_for('admin_payfine') }}">Pay Fine</a></td>
+            </tr>
+        </table>
+
+        <!-- Actions -->
+        <div class="actions">
+            <button type="button" onclick="window.history.back()">Back</button>
+            <!--<button type="button" onclick="location.href='{{ url_for('admin_page') }}'">Submit</button> -->
+        </div>
+
+        <!-- Logout -->
+        <div class="logout">
+            <form action="{{ url_for('logout') }}" method="post">
+                <button type="submit">Log Out</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

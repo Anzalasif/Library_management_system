@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #2575fc;
+            color: white;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+        }
+        .navbar div {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .centered-text {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        td input[type="text"], td select {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+        }
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .actions .back-button {
+            background-color: #f44336;
+            color: white;
+        }
+        .actions .back-button:hover {
+            background-color: #d32f2f;
+        }
+        .actions .submit-button {
+            background-color: #2575fc;
+            color: white;
+        }
+        .actions .submit-button:hover {
+            background-color: #388E3C;
+        }
+        .actions .cancel-button {
+            background-color: #9E9E9E;
+            color: white;
+        }
+        .actions .cancel-button:hover {
+            background-color: #757575;
+        }
+        .logout {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logout button {
+            background: none;
+            border: none;
+            color: #2575fc;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .logout button:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="navbar">
+            <div><a href="#">Chart</a></div>
+            <div>Transactions</div>
+            <div><a href="{% if user_role == 'admin' %}{{ url_for('admin_page') }}{% else %}{{ url_for('user_page') }}{% endif %}">Home</a></div>
+        </div>
+
+        <!-- Search Form -->
+        <form id="searchForm" action="#" method="post" onsubmit="return showSearchResults()">
+            <table>
+                <tr>
+                    <th>Is book available?</th>
+                    <td>Book Availability</td>
+                </tr>
+                <tr>
+                    <th>Issue book?</th>
+                    <td>
+                        <input type="text" placeholder="Enter Book Name" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Return book?</th>
+                    <td>
+                        <input type="text" placeholder="Enter Author" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Pay Fine?</th>
+                    <td>
+                        <!-- Additional fields can be added here if needed -->
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Buttons -->
+            <div class="actions">
+                <button type="submit" class="submit-button">Search</button>
+                <button type="button" class="cancel-button" onclick="window.location.href='/cancel'">Cancel</button>
+            </div>
+        </form>
+
+        <!-- Search Results Table (Initially Hidden) -->
+        <div id="searchResults" style="display:none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Book Name</th>
+                        <th>Author Name</th>
+                        <th>Serial Number</th>
+                        <th>Available</th>
+                        <th>Select to issue the book</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Book A</td>
+                        <td>Author A</td>
+                        <td>12345</td>
+                        <td>Y</td>
+                        <td><input type="radio" name="selectBook" value="bookA"></td>
+                    </tr>
+                    <tr>
+                        <td>Book B</td>
+                        <td>Author B</td>
+                        <td>67890</td>
+                        <td>Y</td>
+                        <td><input type="radio" name="selectBook" value="bookB"></td>
+                    </tr>
+                    <tr>
+                        <td>Book C</td>
+                        <td>Author C</td>
+                        <td>54321</td>
+                        <td>Y</td>
+                        <td><input type="radio" name="selectBook" value="bookC"></td>
+                    </tr>
+                    <tr>
+                        <td>Book D</td>
+                        <td>Author D</td>
+                        <td>98765</td>
+                        <td>N</td>
+                        <td><input type="radio" name="selectBook" value="bookD" disabled></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Back and Cancel Buttons -->
+            <div class="actions">
+                <button type="button" class="back-button" onclick="window.history.back()">Back</button>
+                <button type="button" class="cancel-button" onclick="window.location.href='cancel.html'">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Logout -->
+        <div class="logout">
+            <form action="{{ url_for('logout') }}" method="post">
+                <button type="submit">Log Out</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showSearchResults() {
+            // Prevent actual form submission
+            event.preventDefault();
+
+            // Hide the search form and show the search results table
+            document.getElementById('searchForm').style.display = 'none';
+            document.getElementById('searchResults').style.display = 'block';
+            
+            return false;
+        }
+    </script>
+</body>
+</html>

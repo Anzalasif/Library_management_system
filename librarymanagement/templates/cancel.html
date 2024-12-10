@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel Transaction</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .message {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #2575fc;
+            color: white;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+        }
+        .logout {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#">Chart</a>
+        <a href="{% if user_role == 'admin' %}{{ url_for('admin_page') }}{% else %}{{ url_for('user_page') }}{% endif %}">Home</a>
+    </div>
+
+    <div class="container">
+        <div class="message">Transaction cancelled</div>
+    </div>
+
+    <!-- Logout Button -->
+    <div class="logout">
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit" style="background: none; border: none; color: #2575fc; text-decoration: underline; cursor: pointer;">Log Out</button>
+        </form>
+    </div>
+
+    <script>
+        // Show alert and redirect after cancellation
+        alert('Transaction cancelled');
+        
+        // Redirect user based on role
+        {% if user_role == 'admin' %}
+        window.location.href = "{{ url_for('transactions_page') }}";
+        {% else %}
+        window.location.href = "{{ url_for('transactions_page') }}"; 
+        {% endif %}
+    </script>
+</body>
+</html>
